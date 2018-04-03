@@ -1,0 +1,400 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Başlıksız Belge</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js"></script>
+
+<script>
+
+$(document).ready(function () {$('#button').click(function () {
+	
+	var Overboard = $('input[name=radyoOverboard]:checked').val();
+	var FiftyPercent = $('input[name=radyoFiftyPercent]:checked').val();
+	var ProposerVote = $('input[name=radyoProposerVote]:checked').val();
+	
+	
+	$.ajax({
+		
+		type: 'POST',
+		url:'Prate_Game.php',
+		data: {Overboard : Overboard , FiftyPercent:FiftyPercent, ProposerVote:ProposerVote },
+		success: function(gelen){
+			
+			$('#sonuc').html(gelen);
+		}
+		
+		
+		  });
+	});
+	});
+
+
+</script>
+
+<style type="text/css">
+<!--
+body {
+	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+	background-color:#D9DAFF;
+	margin: 0;
+	padding: 0;
+	color: #000;
+}
+
+/* ~~ Öğe/etiket seçiciler ~~ */
+ul, ol, dl { /* Tarayıcıların arasındaki çeşitlemelerden dolayı, listelerde dolgu ve kenar boşluğunu sıfırlamakta fayda vardır. Tutarlılık sağlamak için, istediğiniz miktarları burada veya içerdikleri liste öğelerinde (LI, DT, DD) belirtebilirsiniz. Burada yaptığınızın siz daha belirli bir seçici yazmadığınız sürece .nav listesine basamaklanacağını unutmayın. */
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* üst kenar boşluğunu kaldırmak kenar boşluklarının onları içeren div’den kaçabilecekleri bir duruma sebep olur. Kalan alt kenar boşluğu onu takip eden herhangi bir öğeden uzak tutar. */
+	padding-right: 15px;
+	padding-left: 15px; /* div’lerin kendisinin yerine onların içindeki öğelerin kenarlarına dolgu eklemek, herhangi bir kutu modeli matematiğinin olmamasını sağlar. Ayrıca kenar dolgulu bir yuvalanmış div de alternatif bir yöntem olarak kullanılabilir. */
+}
+a img { /* bu seçici, bazı tarayıcılarda görüntü bir bağla çevrelendiğinde görüntünün etrafında görüntülenen varsayılan mavi kenarlığı kaldırır. */
+	border: none;
+}
+
+/* ~~ Sitenizin bağlarının stili, hover efektini oluşturan seçiciler grubu da dahil olmak üzere, şu sırada kalmalıdır. ~~ */
+a:link {
+	color: #42413C;
+	text-decoration: underline; /* bağlarınıza aşırı derecede benzersiz görüneceği şekilde stil vermediğiniz sürece, hızlı görsel tanımlama olabilmesi için yapılabilecek en iyi şey alt çizgi sağlamaktır.  */
+}
+a:visited {
+	color: #6E6C64;
+	text-decoration: underline;
+}
+a:hover, a:active, a:focus { /* bu seçiciler grubu, bir klavye gezginine fare kullanan bir kişiyle aynı hover (üzerine gelme) deneyimini sağlayacaktır. */
+	text-decoration: none;
+}
+
+/* ~~bu sabit genişlik kabı diğer div’leri çevreler~~ */
+.container {
+	width: 50em;
+	background-color: #FFF;
+	margin: 0 auto; /* genişlik ile eşleştirilen kenarlardaki otomatik değer, mizanpajı ortalar */
+	height:auto ;
+
+}
+
+/* ~~ üstbilgi belirli bir genişlik değildir. Mizanpajınızın tüm genişliğini uzatır. Sizin kendi bağlı logonuzla değiştirilmesi gereken bir görüntü yer tutucusu içerir ~~ */
+.header {
+	margin-top: 20px;
+	background-color:#2198C0 ;
+}
+
+/* ~~ Bunlar mizanpaj sütunlarıdır. ~~  
+
+1) Dolgu yalnızca div’lerin üst ve/veya alt kısmına yerleştirilir. Bu dolguların içindeki öğelerin kenarlarında dolgu vardır. Bu sizi herhangi bir "kutu modeli matematiğinden" kurtarır. Div’in kendisine herhangi bir kenar dolgusu veya kenarlık eklerseniz, bu *toplam* genişliği oluşturmak için tanımladığınız genişliğe eklenir. Ayrıca div’deki öğenin dolgusunu kaldırıp içine genişliği olmayan yeni bir div ve tasarımınız için gerekli olan dolguyu yerleştirmeyi de seçebilirsiniz.
+
+2) Hepsi yüzdürüldüğünden, sütunlara herhangi bir kenar boşluğu eklenmedi. Bir kenar boşluğu eklemeniz gerekiyorsa, onu yüzdürdüğünüz tarafa yerleştirmekten kaçının (örneğin: sağa yüzecek şekilde ayarlanan bir sağ kenar boşluğu). Çoğu zaman, onun yerine dolgu kullanılabilir. Bu kuralın kırılması gereken div’ler için, Internet Explorer’ın çift kenar boşluğuna sahip olduğu bazı sürümlerindeki bir hatayı gidermek amacıyla, div’in kuralına bir "display:inline " bildirimi eklemeniz gerekir.
+
+3) Sınıflar bir belgede bir kereden fazla kullanılabildiği için ( ve bir öğeye de birden çok sınıf uygulanabildiğinden), sütunlara kimlikler yerine sınıf adları eklenmiştir. Örneğin, iki yan çubuk div’i gerektiğinde yığınlanabilir. Tercihiniz buysa, belge başına bir kere kullandığınız sürece bunlar kolaylıkla kimlikler olarak değiştirilebilir.
+
+4) Gezinme çubuğunuzun sağ yerine sol tarafta olmasını tercih ediyorsanız, bu sütunları ters yönde yüzdürmeniz yeterlidir (hepsini sağa yüzdürmek yerine hepsini sola yüzdürmek), böylece onlar ters sırada yüzecektir. Bir HTML kaynağında div’lerin yerini oynatmaya gerek yoktur.
+
+*/
+.sidebar1 {
+	float: left;
+	width: 20em;
+	background-color: #2198C0;
+	
+	
+	
+	
+}
+.content {
+
+	padding: 10px 0;
+	width: 30em;
+	float: right;
+}
+
+/* ~~ Bu gruplanan seçici .content alanındaki listeleri verir ~~ */
+.content ul, .content ol { 
+	padding: 0 15px 15px 40px; /* bu dolgu yukarıda üstbilgilerdeki ve paragraf kuralındaki sağ dolguyu yansıtır. Dolgu, listelerdeki diğer öğeler arasındaki alan için alta ve satırbaşını oluşturmak için sola yerleştirilir. Bunlar istediğiniz gibi ayarlanabilir.  */
+}
+
+/* ~~ Gezinme listesi stilleri (Spry gibi bir önceden yapılmış açılır pencere menüsü kullanmayı tercih ederseniz kaldırılabilir) ~~  */
+ul.nav {
+	list-style: none; /* bu, liste işaretleyicisini kaldırır */
+	border-top: 1px solid #666; /* bu, bağlar için üst kenarlık oluşturur – diğerlerinin tümü LI’da bir alt kenarlık kullanılarak yerleştirilir */
+	margin-bottom: 15px; /* bu aşağıdaki içerikteki gezinmenin arasındaki alanı oluşturur */
+}
+ul.nav li {
+	border-bottom: 1px solid #666; /* bu düğme ayrımını oluşturur */
+}
+ul.nav a, ul.nav a:visited { /* bu seçicileri gruplamak, bağlarınızın ziyaret edildikten sonra bile düğme görünümünü kaybetmemesini sağlar */
+	padding: 5px 5px 5px 15px;
+	display: block; /* bu, bağa blok özellikleri ekleyerek onu içeren LI’nın tamamının doldurmasını sağlar. Bu, alanın tümünün fare tıklatılmasına tepki vermesini sağlar. */
+	width: 160px;  /*bu genişlik düğmenin tamamını IE6 için tıklatılabilir hale getirir. IE6’yı desteklemeniz gerekmiyorsa, kaldırılabilir. Bu bağdaki dolguyu yan çubuk kabınızın genişliğinden çıkararak uygun genişliği hesaplayın. */
+	text-decoration: none;
+	background-color: #C6D580;
+}
+ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* bu, fare ve klavye gezginleri için arka plan ve metin rengini değiştirir */
+	background-color: #ADB96E;
+	color: #FFF;
+}
+
+/* ~~ Altbilgi ~~ */
+.footer {
+	padding: 10px 0;
+	background-color:#036;
+	position: relative;/* bu, temizlemenin düzgün olması için IE6’ya hasLayout öğesini verir */
+	clear: both; /* bu temizleme özelliği .container öğesini sütunların nerede bittiğini anlamaya ve onları içermeye zorlar */
+}
+
+/* ~~ çeşitli float/clear sınıfları ~~ */
+.fltrt {  /* bu sınıf bir öğeyi sayfanızın sağında yüzdürmek için kullanılabilir. Yüzen öğe sayfada olması gereken bir sonraki öğeden önce gelmelidir. */
+	float: right;
+	margin-left: 8px;
+	
+}
+.fltlft { /* bu sınıf bir öğeyi sayfanızın solunda yüzdürmek için kullanılabilir. Yüzen öğe sayfada olması gereken bir sonraki öğeden önce gelmelidir. */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* bu sınıf, #footer kaldırılırsa veya #container öğesinden çıkarılırsa, son yüzdürülen div’i (#container öğesi içinde) takiben bir <br /> veya boş bir div’e yerleştirilebilir */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+	
+}
+
+table {
+  margin-bottom: 5px;
+  width: 100%;
+  box-shadow: 0 0px 1px rgba(0,0,0,0.2);
+  display: table;
+  text-align:center;
+  border: #FFF;
+  border-style: solid;
+  
+  
+  
+}
+td {
+	
+	width: 50em;
+	
+	color:#09F;
+	
+	
+}
+
+th {
+	
+	width: 50em;
+	
+	color:#09F;
+	
+	
+}
+
+
+#sonuc {
+	font-size:36px;
+}
+
+
+#button {
+  background: #2198C0;
+  
+  font-family: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+  color: #ffffff;
+  font-weight:bold;
+  font-size:16px;
+  padding: 10px 10em 10px 10em;
+  text-decoration: none;
+  margin-left:20px;
+}
+
+#buttonReset {
+  background: #FFF;
+  
+  font-family: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+  color: #2198C0;
+  font-weight:bold;
+  font-size:16px;
+  border-bottom-color:#FFF;
+  padding: 0px 8em 0px 9em;
+  
+  margin-left:-15px;
+}
+
+
+
+input:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+
+.sonucTable 
+{
+	margin-top: 50px;
+	margin-left:16px;
+	width: 28em;
+	
+}
+
+p {
+	font-family: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+   color:#FFF;	
+   font-weight:bold;
+   
+   
+}
+
+
+
+label
+{
+	color:#FFF;
+	
+}
+
+h3
+{
+	color:#FFF;
+}
+  
+-->
+</style></head>
+
+<body>
+<div class="container">
+  <div class="header"><img  height="5" id="Insert_logo" style="background-color: #39F ; display:block;" /> <h3> Prate Game</h3> 
+  <p> There are 5 rational pirates, A, B, C, D and E. They find 100 gold coins. They must decide how to distribute them. </p>
+<p>
+The pirates have a strict order of seniority: A is superior to B, who is superior to C, who is superior to D, who is superior to E. </p>
+<p>
+The pirate world's rules of distribution are thus: that the most senior pirate should propose a distribution of coins. The pirates then vote on whether to accept this distribution. If the distribution is accepted, the coins are disbursed and the game ends. If not, the proposer is thrown overboard from the pirate ship and dies, and the next most senior pirate makes a new proposal to begin the system again.
+</p> 
+<p>
+Pirates base their decisions on two factors and options below. First of all, each pirate wants to survive. Second, given survival, each pirate wants to maximize the number of gold coins he receives. The pirates do not trust each other, and will neither make nor honor any promises between pirates apart from a proposed distribution plan that gives a whole number of gold coins to each pirate.  <a href="http://en.wikipedia.org/wiki/Pirate_game" target="_blank">(Wiki)</a></p>
+    <br />
+    <!-- end .header --></div>
+  <div class="sidebar1">
+  
+  
+  <table >
+  <tr>
+    <th colspan="2">
+    
+    <p>Has the proposer vote.?</p>
+    
+    </th>
+  </tr>
+  <tr>
+    <td>
+     <label>
+      <input  type="radio" name="radyoProposerVote" id="radyoProposerVote_0" value="true" checked="checked" />
+      Yes</label>
+    </td>
+    <td>
+    <label>
+      <input type="radio" name="radyoProposerVote" value="false" id="radyoProposerVote_1" />
+      No</label>
+    
+    </td>
+  </tr>
+</table>
+
+<table >
+  <tr>
+    <th colspan="2">
+    
+    <p>Is 50% vote enaugh? </p> 
+    
+    </th>
+  </tr>
+  <tr>
+    <td>
+     <label>
+      <input type="radio" name="radyoFiftyPercent"  id="true" value="true" checked="checked" />
+      Yes
+      </label>
+    </td>
+    <td>
+     <label>
+      <input type="radio" name="radyoFiftyPercent" value="false" id="false" />
+      No</label>
+      
+    
+    </td>
+  </tr>
+</table>
+
+<table  >
+  <tr>
+    <th colspan="2">
+    
+    <p>Would each pirate prefer to throw another overboard, if all other results would otherwise be equal?</p> 
+    
+    </th>
+  </tr>
+  <tr>
+    <td>
+     <label> 
+      		<input type="radio" name="radyoOverboard" id="true" value="true" checked="checked" />
+      		Yes
+    	 </label>
+    </td>
+    <td>
+     <label>
+      		<input type="radio" name="radyoOverboard" value="false" id="false" />
+      		No 
+         </label>
+      
+    
+    </td>
+  </tr>
+</table>
+
+<p>
+  <input type="submit" name="buttonReset" id="buttonReset" value="Reset" onClick="history.go(0)" />
+</p>
+   
+   
+  
+<!-- end .sidebar1 --></div>
+  <div class="content">  
+  
+  <p>
+  <input type="submit" name="button" id="button" value="SOLVE" />
+</p>
+
+<table class="sonucTable">
+  <tr>
+    <th>A</th>
+    <th>B</th>
+    <th>C</th>
+    <th>D</th>
+    <th>E</th>
+  </tr>
+</table>
+
+
+  <p id='sonuc'> 
+  
+</p> 
+   
+
+
+
+      <!-- end .content --></div>
+  <div class="footer">
+    <p> The pirate game is a simple mathematical game. It illustrates how, if assumptions conforming to a homo economicus model of human behaviour hold, outcomes may be surprising.</p>
+    <p> <a href="http://en.wikipedia.org/wiki/Pirate_game" target="_blank">Wikipedia Pirate Game</a></p>
+    
+    <!-- end .footer --></div>
+  <!-- end .container --></div>
+</body>
+</html>
