@@ -1,4 +1,7 @@
 # pirate_game
+
+[Play Game](https://pirates--pirategame--dzh6zw6n22gs.code.run/web/)
+
 The pirate game is a simple mathematical game. It is a multi-player version of the ultimatum game.
 
 There are 5 rational pirates, A, B, C, D and E. They find 100 gold coins. They must decide how to distribute them.
